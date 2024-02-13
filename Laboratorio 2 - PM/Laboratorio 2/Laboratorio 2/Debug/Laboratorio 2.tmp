@@ -1,0 +1,36 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.INC</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\Debug\Laboratorio 2.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Laboratorio 2.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Laboratorio 2.map</FILE>
+  <FILE>Laboratorio 2.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <TABLA7SEGMENTOS><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>28</LINE></TABLA7SEGMENTOS>
+  <Setup><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>33</LINE></Setup>
+  <LOOP><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>75</LINE></LOOP>
+  <INCREMENTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>104</LINE></INCREMENTAR>
+  <DECREMENTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>112</LINE></DECREMENTAR>
+  <TOOGLE><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>96</LINE></TOOGLE>
+  <ANTIREBOTE><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>119</LINE></ANTIREBOTE>
+  <MAIN><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>127</LINE></MAIN>
+  <DELAY><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 2 - PM\Laboratorio 2\Laboratorio 2\main.asm</FILE><LINE>121</LINE></DELAY>
+ </LABELS>
+</ASSEMBLER_INFO>
