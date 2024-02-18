@@ -1,0 +1,38 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.INC</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\Debug\Prelab3.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Prelab3.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Prelab3.map</FILE>
+  <FILE>Prelab3.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Setup><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>33</LINE></Setup>
+  <TABLA7SEGMENTOS><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>70</LINE></TABLA7SEGMENTOS>
+  <LOOP><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>75</LINE></LOOP>
+  <INCREMENTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>107</LINE></INCREMENTAR>
+  <DECREMENTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>117</LINE></DECREMENTAR>
+  <TOOGLE><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>94</LINE></TOOGLE>
+  <ANTIREBOTE><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>127</LINE></ANTIREBOTE>
+  <PASO_INC><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>113</LINE></PASO_INC>
+  <MAIN><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>134</LINE></MAIN>
+  <PASO_DEC><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>123</LINE></PASO_DEC>
+  <DELAY><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Prelab3\Prelab3\main.asm</FILE><LINE>129</LINE></DELAY>
+ </LABELS>
+</ASSEMBLER_INFO>
