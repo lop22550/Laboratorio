@@ -17,7 +17,7 @@
 .org 0x0008			; Vector de interrupción  PIN CHANGE 1 (Puertos C)
 	JMP ISR_PCINT1
 .org 0x0020			; Vector: Overflow Timer0
-	JMP 
+	JMP ISR_T0_OVF 
 
 MAIN: 
 ;************************************************************************
@@ -37,16 +37,21 @@ OUT SPH, R16
 	LDI R16, 0x00
 	STS UCSR0B, R16 ; Deshabilita a RX y TX del puerto D
 	
-	;Contador binario
-	SBI PORTC, PC4	;Habilitando pull-up en PC4
-	CBI DDRC, PC4	;Habilitando PC4 como entrada
-	SBI PORTC, PC5
-	CBI DDRC, PC5
+	; I/O para Contador binario
+	SBI PORTB, PB0	;Habilitando pull-up en PC4
+	CBI DDRB, PC0	;Habilitando PC4 como entrada
+	SBI PORTB, PC1
+	CBI DDRB, PC1
 
 	LDI R16, (1<<PC0)|(1<<PC1)|(1<<PC2)|(1<<PC3)
 	OUT DDRC, R16	;Habilitando PC0 - PC3 como salidas del contador binario
 	LDI R16, (0<<PC0)|(0<<PC1)|(0<<PC2)|(0<<PC3)
 	OUT PORTC, R16	;Apagando los pines
+
+	;I/O para Contadores hexadecimales 
+
+
+
 
 	;CALL Init_T0	; Configuración de Timer0
 
@@ -58,10 +63,10 @@ OUT SPH, R16
 
 	
 	;Configuración de Pin Change
-	LDI R16, (1<<PCIE1)
+	LDI R16, (1<<PCIE0)
 	STS PCICR, R16
-	LDI R16, (1<<PCINT12)|(1<<PCINT13)		; Habilitando PCINT en los pines PC4 y PC5.
-	STS PCMSK1, R16							; Se configuran los pines PC4 y PC5 para detectar un cambio.
+	LDI R16, (1<<PCINT0)|(1<<PCINT1)		; Habilitando PCINT en los pines PB0 y PB1.
+	STS PCMSK0, R16							; Se configuran los pines PB0 y PB1 para detectar un cambio.
 
 	
 	TABLA7SEGMENTOS: .DB 0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47 
@@ -72,7 +77,7 @@ OUT SPH, R16
 ;************************************************************************
 
 LOOP:
-	OUT PORTD, R20		;Muestra contador binario
+	OUT PORTC, R20		;Muestra contador binario
 
 
 	;IN		R17, TIFR0 ;registro de flags 
@@ -82,16 +87,16 @@ LOOP:
 
 
 ;***********************************************************
-;SUBRUTINAS DE INTERRUPCIÓN (ISR): 
+;SUBRUTINAS DE INTERRUPCIÓN (ISR) DE PIN CHANGE: 
 ;***********************************************************
 ISR_PCINT1:
 	PUSH R16	;Guarda en pila lo que tenga R16
 	IN R16, SREG
 	PUSH R16	;Guarda en pila el registro SREG
 
-	IN R16, PINC 
+	IN R16, PINB
 	
-	SBRC R16, PC0
+	SBRC R16, PB0
 	RJMP DECREMENTAR
 	INC R20 
 	SBRC R20, 4 
@@ -112,6 +117,10 @@ ISR_PCINT1:
 	POP R16
 	RETI
 ;***********************************************************
+;SUBRUTINAS DE INTERRUPCIÓN (ISR) DE TIMER0 OVERFLOW: 
+;***********************************************************
+
+;***********************************************************
 ;SUBRUTINAS IMPORTANTES: 
 ;***********************************************************
 
@@ -127,14 +136,14 @@ Init_T0:
 
 
 		
-MAIN: 
-	LDI ZH, HIGH(TABLA7SEGMENTOS <<1)
-	LDI ZL, LOW(TABLA7SEGMENTOS << 1)
-	ADD ZL, CONTADOR
-	LPM R16, Z
-	OUT PORTD, R16
+;MAIN: 
+	;LDI ZH, HIGH(TABLA7SEGMENTOS <<1)
+	;LDI ZL, LOW(TABLA7SEGMENTOS << 1)
+	;ADD ZL, CONTADOR
+	;LPM R16, Z
+	;OUT PORTD, R16
 	
-	RET
+	;RET
 
 
 
