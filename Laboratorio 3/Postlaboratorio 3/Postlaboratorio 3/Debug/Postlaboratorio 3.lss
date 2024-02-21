@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm Sun Feb 18 10:19:18 2024
+AVRASM ver. 2.2.8  C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm Tue Feb 20 12:56:35 2024
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
-C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm(13): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.INC'
+C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm(14): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.INC'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
-C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm(13): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.INC'
+C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm(14): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.INC'
                                  
                                  ;************************************************************************
                                  
@@ -995,6 +995,7 @@ C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\
                                  ; Proyecto: Postlaboratorio 3
                                  ; Hardware: Atmega328P
                                  ; Creado: 16/02/2024
+                                 ; Última modificación: 18/02/2023 13:40 pm
                                  ;************************************************************************
                                  ;Encabezado
                                  ;************************************************************************
@@ -1044,11 +1045,12 @@ C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\
                                  ; ***** END OF FILE ******************************************************
                                  .cseg
                                  .org 0x0000			; Vector RESET
-000000 940c 0020                 	JMP MAIN 
+000000 940c 0022                 	JMP MAIN 
                                  .org 0x0008			; Vector de interrupción  PIN CHANGE 1 (Puertos C)
-000008 940c 0046                 	JMP ISR_PCINT1
+000008 940c 0077                 	JMP ISR_PCINT1
                                  .org 0x0020			; Vector: Overflow Timer0
-                                 	;JMP 
+000020 940c 008b                 	JMP ISR_T0_OVF 
+                                 
                                  
                                  MAIN: 
                                  ;************************************************************************
@@ -1056,955 +1058,206 @@ C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\
                                  ;************************************************************************
                                  ; Configuración de los espacios a utilizar de la RAM
                                  Setup: 
-000020 ef0f                      LDI R16, LOW(RAMEND)
-000021 bf0d                      OUT SPL, R16
-000022 e008                      LDI R16, HIGH(RAMEND)
-000023 bf0e                      OUT SPH, R16
+000022 ef0f                      LDI R16, LOW(RAMEND)
+000023 bf0d                      OUT SPL, R16
+000024 e008                      LDI R16, HIGH(RAMEND)
+000025 bf0e                      OUT SPH, R16
+                                 
+000026 307e
+000027 796d
+000028 5b33
+000029 705f
+00002a 7b7f
+00002b 1f77
+00002c 3d4e
+00002d 474f                      TABLA7SEGMENTOS: .DB 0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47 	
                                  
                                  
                                  ;************************************************************************
                                  ; CONFIGURACIÓN
                                  ;************************************************************************
-000024 e000                      	LDI R16, 0x00
-000025 9300 00c1                 	STS UCSR0B, R16 ; Deshabilita a RX y TX del puerto D
+00002e e000                      	LDI R16, 0x00
+00002f 9300 00c1                 	STS UCSR0B, R16 ; Deshabilita a RX y TX del puerto D
+                                 
+000031 e0f0                      	LDI ZH, HIGH(TABLA7SEGMENTOS <<1)
+000032 e4ec                      	LDI ZL, LOW(TABLA7SEGMENTOS << 1)
                                  	
-                                 	;Contador binario
-000027 9a28                      	SBI PORTB, PB0	;Habilitando pull-up en PC4
-000028 9820                      	CBI DDRB, PC0	;Habilitando PC4 como entrada
-000029 9a29                      	SBI PORTB, PC1
-00002a 9821                      	CBI DDRB, PC1
+                                 	; I/O para Contador binario
+000033 9a28                      	SBI PORTB, PB0	;Habilitando pull-up en PB0
+000034 9820                      	CBI DDRB, PB0	;Habilitando PB0 como entrada
+000035 9a29                      	SBI PORTB, PB1	;Habilitando pull-up en PB1
+000036 9821                      	CBI DDRB, PB1	;Habilitando PB1 como entrada
                                  
-00002b e00f                      	LDI R16, (1<<PC0)|(1<<PC1)|(1<<PC2)|(1<<PC3)
-00002c b907                      	OUT DDRC, R16	;Habilitando PC0 - PC3 como salidas del contador binario
-00002d e000                      	LDI R16, (0<<PC0)|(0<<PC1)|(0<<PC2)|(0<<PC3)
-00002e b908                      	OUT PORTC, R16	;Apagando los pines
+000037 e00f                      	LDI R16, (1<<PC0)|(1<<PC1)|(1<<PC2)|(1<<PC3)
+000038 b907                      	OUT DDRC, R16	;Habilitando PC0 - PC3 como salidas del contador binario
+000039 e000                      	LDI R16, (0<<PC0)|(0<<PC1)|(0<<PC2)|(0<<PC3)
+00003a b908                      	OUT PORTC, R16	;Apagando los pines
                                  
-                                 	;CALL Init_T0	; Configuración de Timer0
+                                 	;I/O para Contadores hexadecimales 
+00003b 9a22                      	SBI DDRB, PB2
+00003c 982a                      	CBI PORTB, PB2
+00003d 9a23                      	SBI DDRB, PB3
+00003e 982b                      	CBI PORTB, PB3	; Habilitando salidas de los dos transistores
+                                 
+00003f ef0f                      	LDI R16, 0xFF
+000040 b90a                      	OUT DDRD, R16
+000041 e000                      	LDI R16, 0x00
+000042 b90b                      	OUT PORTD, R16	; Habilitando salidas para los displays de 7 segmentos
+                                 
+                                 	;Configuración del Timer0
+000043 e000                      	LDI R16, 0x00
+000044 bd04                      	OUT TCCR0A, R16			;Coloca el timer en modo de operación normal
+000045 e005                      	LDI R16, 0b0000_0101	; pone en 1 los bits CS02 y CS00 para colocar un prescaler en 1024
+000046 bd05                      	OUT TCCR0B, R16 
+000047 e602                      	LDI R16, 98				; valor de comparación
+000048 bd06                      	OUT TCNT0, R16 	
+                                 
+000049 e001                      	LDI R16, (1<<TOIE0)		;Habilito interrupción
+00004a 9300 006e                 	STS TIMSK0, R16	; Configuración de Timer0
                                  
                                  	;Prescaler
-00002f e800                      	LDI R16, (1 << CLKPCE) ; Se habilita el clock prescaler
-000030 9300 0061                 	STS CLKPR, R16 
-000032 e005                      	LDI R16, 0b0000_0101 ; se define la frecuencia de 1MHz
-000033 9300 0061                 	STS CLKPR, R16
+00004c e800                      	LDI R16, (1 << CLKPCE) ; Se habilita el clock prescaler
+00004d 9300 0061                 	STS CLKPR, R16 
+00004f e005                      	LDI R16, 0b0000_0101 ; se define la frecuencia de 1MHz
+000050 9300 0061                 	STS CLKPR, R16
                                  
                                  	
                                  	;Configuración de Pin Change
-000035 e001                      	LDI R16, (1<<PCIE0)
-000036 9300 0068                 	STS PCICR, R16
-000038 e003                      	LDI R16, (1<<PCINT0)|(1<<PCINT1)		; Habilitando PCINT en los pines PB0 y PB1.
-000039 9300 006b                 	STS PCMSK0, R16							; Se configuran los pines PB0 y PB1 para detectar un cambio.
+000052 e001                      	LDI R16, (1<<PCIE0)
+000053 9300 0068                 	STS PCICR, R16
+000055 e003                      	LDI R16, (1<<PCINT0)|(1<<PCINT1)		; Habilitando PCINT en los pines PB0 y PB1.
+000056 9300 006b                 	STS PCMSK0, R16							; Se configuran los pines PB0 y PB1 para detectar un cambio.
                                  
-                                 	
-00003b 307e
-00003c 796d
-00003d 5b33
-00003e 705f
-00003f 7b7f
-000040 1f77
-000041 3d4e
-000042 474f                      	TABLA7SEGMENTOS: .DB 0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47 
+                                 	.DEF CONTADOR1 = R18
+                                 	.DEF CONTADOR2 = R22
                                  
-000043 9478                      	SEI					;Se inician las interrupciones globales
+000058 9478                      	SEI					;Se inician las interrupciones globales
                                  ;************************************************************************
                                  ;LOOP PRINCIPAL 
                                  ;************************************************************************
                                  
                                  LOOP:
-000044 b948                      	OUT PORTC, R20		;Muestra contador binario
+                                 	; PIN CHANGE
+000059 b948                      	OUT		PORTC, R20		;Muestra contador binario
                                  
+                                 	;TIMER0 OVERFLOW
+                                 	;SIETE_SEGMENTOS:
+                                 	;PB3 ES PARA EL CONTADOR DE SEGUNDOS
+                                 	;PB2 ES PARA EL CONTADOR DE DECENAS
                                  
-                                 	;IN		R17, TIFR0 ;registro de flags 
-                                 	;SBRC	R17, OCF0A
+                                 	;Segundero
+00005a 9a2b                      	SBI		PORTB, PB3 
+00005b e4ec                      	LDI		ZL, LOW(TABLA7SEGMENTOS << 1)
+00005c e0f0                      	LDI		ZH, HIGH(TABLA7SEGMENTOS << 1) 
+00005d 0fe1                      	ADD		ZL, R17
+00005e 9124                      	LPM		CONTADOR1, Z
+00005f b92b                      	OUT		PORTD, CONTADOR1
+000060 d037                      	RCALL	Delay
+000061 982b                      	CBI		PORTB, PB3
                                  
-000045 cffe                      	RJMP	LOOP
+                                 	
+                                 	;Decenas
+000062 9a2a                      	SBI		PORTB, PB2
+000063 e4ec                      	LDI		ZL, LOW(TABLA7SEGMENTOS << 1)
+000064 0fe5                      	ADD		ZL, R21
+000065 9164                      	LPM		CONTADOR2, Z
+000066 b96b                      	OUT		PORTD, CONTADOR2
+000067 d030                      	RCALL	Delay
+000068 982a                      	CBI		PORTB, PB2
+                                 	
+                                 	
+                                 	;lo demas...
+                                 	;INC		R17
+000069 301a                      	CPI		R17, 0b0000_1010
+00006a f021                      	BREQ	REINICIAR
+                                 	
+00006b 3634                      	CPI		R19, 100
+00006c f761                      	BRNE	LOOP
+00006d 2733                      	CLR		R19
                                  
+00006e cfea                      	RJMP	LOOP
+                                 	
+                                 	
+                                 	/*INC		R17
+                                 	CPI		R17, 0b0000_1010
+                                 	BREQ	REINICIAR
+                                 	RJMP	LOOP*/
                                  
+                                 	REINICIAR: 
+00006f e010                      		LDI R17, 0x00
+000070 e4ec                      		LDI ZL, LOW(TABLA7SEGMENTOS << 1)
+000071 9553                      		INC R21
+000072 305a                      		CPI R21, 0b0000_1010
+000073 f009                      		BREQ REINICIAR_2
+000074 cfe4                      		RJMP LOOP
+                                 
+                                 	REINICIAR_2:
+000075 e050                      		LDI R21, 0x00
+000076 cfe2                      		RJMP LOOP
+                                 		
                                  ;***********************************************************
-                                 ;SUBRUTINAS DE INTERRUPCIÓN (ISR): 
+                                 ;SUBRUTINAS DE INTERRUPCIÓN (ISR) DE PIN CHANGE: 
                                  ;***********************************************************
                                  ISR_PCINT1:
-000046 930f                      	PUSH R16	;Guarda en pila lo que tenga R16
-000047 b70f                      	IN R16, SREG
-000048 930f                      	PUSH R16	;Guarda en pila el registro SREG
+000077 930f                      	PUSH R16	;Guarda en pila lo que tenga R16
+000078 b70f                      	IN R16, SREG
+000079 930f                      	PUSH R16	;Guarda en pila el registro SREG
                                  
-000049 b103                      	IN R16, PINB
+00007a b103                      	IN R16, PINB
                                  	
-00004a fd00                      	SBRC R16, PB0
-00004b c004                      	RJMP DECREMENTAR
-00004c 9543                      	INC R20 
-00004d fd44                      	SBRC R20, 4 
-00004e 2744                      	CLR R20
-00004f c005                      	RJMP SALTAR
+00007b fd00                      	SBRC R16, PB0
+00007c c004                      	RJMP DECREMENTAR
+00007d 9543                      	INC R20 
+00007e fd44                      	SBRC R20, 4 
+00007f 2744                      	CLR R20
+000080 c005                      	RJMP SALTAR
                                  
                                  	DECREMENTAR: 
-000050 ff01                      	SBRS R16, PC1
-000051 954a                      	DEC R20
-000052 fd44                      	SBRC R20, 4
-000053 e04f                      	LDI R20, 0x0F
-000054 c000                      	RJMP SALTAR 
+000081 ff01                      	SBRS R16, PC1
+000082 954a                      	DEC R20
+000083 fd44                      	SBRC R20, 4
+000084 e04f                      	LDI R20, 0x0F
+000085 c000                      	RJMP SALTAR 
                                  
                                  	SALTAR: 
-000055 9ad8                      	SBI PCIFR, PCIF0
-000056 910f                      	POP R16
-000057 bf0f                      	OUT SREG, R16
-000058 910f                      	POP R16
-000059 9518                      	RETI
+000086 9ad8                      	SBI PCIFR, PCIF0
+000087 910f                      	POP R16
+000088 bf0f                      	OUT SREG, R16
+000089 910f                      	POP R16
+00008a 9518                      	RETI
+                                 ;***********************************************************
+                                 ;SUBRUTINAS DE INTERRUPCIÓN (ISR) DE TIMER0 OVERFLOW: 
+                                 ;***********************************************************
+                                 ISR_T0_OVF:
+00008b 930f                      	PUSH R16
+00008c b70f                      	IN R16, SREG
+00008d 930f                      	PUSH R16
+                                 
+00008e e302                      	LDI R16, 50
+00008f bd06                      	OUT TCNT0, R16
+000090 9aa8                      	SBI TIFR0, TOV0
+000091 9533                      	INC R19
+                                 
+                                 	;SBI PINC, PC0
+000092 9513                      	INC R17
+                                 
+                                 	
+000093 910f                      	POP R16
+000094 bf0f                      	OUT SREG, R16
+000095 910f                      	POP R16
+000096 9518                      	RETI 
+                                 
+000097 9508                      	RET 
+                                 
+                                 Delay:
+000098 e604                      	LDI R16, 100 
+                                 	delaydeespera:
+000099 950a                      		DEC R16
+00009a f7f1                      		BRNE delaydeespera
+00009b 9508                      	RET
                                  ;***********************************************************
                                  ;SUBRUTINAS IMPORTANTES: 
                                  ;***********************************************************
-                                 
-                                 ;Inicialización del Timer 0
-                                 Init_T0:
-                                 	;Configuración del Timer0
-00005a e000                      	LDI R16, 0x00
-00005b bd04                      	OUT TCCR0A, R16			;Coloca el timer en modo de operación normal
-00005c e005                      	LDI R16, 0b0000_0101	; pone en 1 los bits CS02 y CS00 para colocar un prescaler en 1024
-00005d bd05                      	OUT TCCR0B, R16 
-00005e e602                      	LDI R16, 98				; valor de comparación
-00005f bd07                      	OUT OCR0A, R16 	
-                                 
-                                 
-                                 		
-                                 ;MAIN: 
-                                 	;LDI ZH, HIGH(TABLA7SEGMENTOS <<1)
-                                 	;LDI ZL, LOW(TABLA7SEGMENTOS << 1)
-                                 	;ADD ZL, CONTADOR
-                                 	;LPM R16, Z
-                                 	;OUT PORTD, R16
-                                 	
-                                 	;RET
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
                                  
 
 
@@ -2023,39 +1276,39 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega328P" register use summary:
-x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
+x  :   0 y  :   0 z  :   2 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  33 r17:   0 r18:   0 r19:   0 r20:   7 
-r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
-r29:   0 r30:   0 r31:   0 
-Registers used: 2 out of 35 (5.7%)
+r13:   0 r14:   0 r15:   0 r16:  49 r17:   4 r18:   2 r19:   3 r20:   7 
+r21:   4 r22:   2 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r29:   0 r30:   6 r31:   2 
+Registers used: 10 out of 35 (28.6%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   2 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   2 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
+brne  :   2 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   6 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   2 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   0 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   1 jmp   :   2 
-ld    :   0 ldd   :   0 ldi   :  13 lds   :   0 lpm   :   0 lsl   :   0 
+cpi   :   3 cpse  :   0 dec   :   2 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :   4 jmp   :   3 
+ld    :   0 ldd   :   0 ldi   :  26 lds   :   0 lpm   :   4 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   9 pop   :   2 
-push  :   2 rcall :   0 ret   :   0 reti  :   1 rjmp  :   4 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   3 sbic  :   0 sbis  :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  15 pop   :   4 
+push  :   4 rcall :   2 ret   :   2 reti  :   2 rjmp  :   6 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   8 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   3 sbrs  :   1 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   5 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   6 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 17 out of 113 (15.0%)
+Instructions used: 24 out of 113 (21.2%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000c0    120     16    136   32768   0.4%
+[.cseg] 0x000000 0x000138    240     16    256   32768   0.8%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

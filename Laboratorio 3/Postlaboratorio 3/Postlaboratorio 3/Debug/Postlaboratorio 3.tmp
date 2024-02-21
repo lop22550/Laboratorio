@@ -23,13 +23,17 @@
   <FILE>Postlaboratorio 3.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <MAIN><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>22</LINE></MAIN>
-  <ISR_PCINT1><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>87</LINE></ISR_PCINT1>
-  <Setup><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>27</LINE></Setup>
-  <TABLA7SEGMENTOS><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>67</LINE></TABLA7SEGMENTOS>
-  <LOOP><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>74</LINE></LOOP>
-  <DECREMENTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>101</LINE></DECREMENTAR>
-  <SALTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>108</LINE></SALTAR>
-  <Init_T0><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>119</LINE></Init_T0>
+  <MAIN><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>24</LINE></MAIN>
+  <ISR_PCINT1><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>163</LINE></ISR_PCINT1>
+  <ISR_T0_OVF><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>193</LINE></ISR_T0_OVF>
+  <Setup><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>29</LINE></Setup>
+  <TABLA7SEGMENTOS><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>35</LINE></TABLA7SEGMENTOS>
+  <LOOP><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>101</LINE></LOOP>
+  <Delay><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>214</LINE></Delay>
+  <REINICIAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>148</LINE></REINICIAR>
+  <REINICIAR_2><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>156</LINE></REINICIAR_2>
+  <DECREMENTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>177</LINE></DECREMENTAR>
+  <SALTAR><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>184</LINE></SALTAR>
+  <delaydeespera><FILE>C:\Users\bjosu\OneDrive\Documentos\UVG\Ciclo 5\Microcontroladores\Laboratorio 3\Postlaboratorio 3\Postlaboratorio 3\main.asm</FILE><LINE>216</LINE></delaydeespera>
  </LABELS>
 </ASSEMBLER_INFO>
