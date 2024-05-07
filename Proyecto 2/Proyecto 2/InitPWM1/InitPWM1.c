@@ -29,5 +29,5 @@ uint8_t updateDutyCycle1A(uint8_t duty1){
 }
 
 uint8_t updateDutyCycle1B(uint8_t duty2){
-	return (uint8_t)(((float)duty1/255)*(MAX1 - MIN1) + MIN1);
+	return (uint8_t)(((float)duty2/255)*(MAX1 - MIN1) + MIN1);
 }
