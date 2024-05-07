@@ -7,6 +7,10 @@
 
 #include "InitPWM1.h"
 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <stdint.h>
+
 void initPWM1(void){
 	DDRB |= (1<<PORTB1);	//Se está configurando el puerto OC1A como salida
 	DDRB |= (1<<PORTB2);	//Se está configurando el puerto OC1B como salida

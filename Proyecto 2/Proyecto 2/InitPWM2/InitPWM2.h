@@ -9,6 +9,10 @@
 #ifndef INITPWM2_H_
 #define INITPWM2_H_
 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <stdint.h>
+
 #define MIN2 9
 #define MAX2 30
 

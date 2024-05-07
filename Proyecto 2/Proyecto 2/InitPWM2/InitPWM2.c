@@ -7,6 +7,10 @@
 
 #include "InitPWM2.h"
 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <stdint.h>
+
 void initPWM2(void){
 	DDRB |= (1<<DDB3);	//Se está configurando el puerto OC1A como salida
 	DDRD |= (1<<DDD3);
@@ -20,4 +24,13 @@ void initPWM2(void){
 
 	OCR2A = (MIN2 & 0xFF);
 	OCR2B = (MIN2 & 0xFF);
+}
+
+uint8_t updateDutyCycle2A(uint8_t duty3){
+	return (uint8_t)(((float)duty3/6));
+
+}
+uint8_t updateDutyCycle2B(uint8_t duty4){
+		return (uint8_t)(((float)duty4/6));
+
 }

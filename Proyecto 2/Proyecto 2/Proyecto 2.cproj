@@ -120,9 +120,26 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="InitPWM1\InitPWM1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="InitPWM1\InitPWM1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="InitPWM2\InitPWM2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="InitPWM2\InitPWM2.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="InitPWM1" />
+    <Folder Include="InitPWM2" />
+    <Folder Include="SerialADA" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
