@@ -13,8 +13,9 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 
-#define MIN2 9
-#define MAX2 30
+#define PWM_TOP2 155
+#define MIN2 3
+#define MAX2 45
 
 void initPWM2 (void);
 uint8_t updateDutyCycle2A(uint8_t duty3);
