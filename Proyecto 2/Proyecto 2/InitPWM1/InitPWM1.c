@@ -18,8 +18,8 @@ void initPWM1(void){
 	TCCR1A = 0;
 	TCCR1B = 0;
 	
-	TCCR1A |= (1<<COM1A1)|(1<<COM1B1)|(1<<WGM11); // Configurando OC1A y OC1B como No invertido| Configurando Modo Fast PWM con ICR1 como TOP
-	TCCR1B |= (1<<WGM13)|(1<<WGM12)|(1<<CS12)|(1<<CS10); //Configurando Modo Fast PWM con ICR1 como TOP | Prescaler de 1024
+	TCCR1A |= (1<<COM1A1)|(1<<COM1B1)|(1<<WGM11);			// Configurando OC1A y OC1B como No invertido| Configurando Modo Fast PWM con ICR1 como TOP
+	TCCR1B |= (1<<WGM13)|(1<<WGM12)|(1<<CS12)|(1<<CS10);	//Configurando Modo Fast PWM con ICR1 como TOP | Prescaler de 1024
 	
 	ICR1H = (PWM_TOP1 & 0xFF00)>>8;
 	ICR1L = (PWM_TOP1 & 0x00FF);
@@ -27,6 +27,9 @@ void initPWM1(void){
 	OCR1AH =(MIN1 & 0xFF00)>>8;
 	OCR1AL = (MIN1 & 0x00FF);
 }
+
+//Las funciones de updateDutyCycle es donde se realizan los mapeos de las señales PWM, según el valor de ADC (duty) que entre en la función. 
+//Practicamente estás funciones controlan los servomotores.
 
 uint8_t updateDutyCycle1A(uint8_t duty1){
 	return (uint8_t)(((float)duty1/255)*(MAX1 - MIN1) + MIN1);

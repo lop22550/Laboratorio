@@ -13,10 +13,12 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 
+//Se definen los valores máximos, mínimos y de tope calculados. 
 #define PWM_TOP1 156 
 #define MIN1 3
 #define MAX1 45
 
+//Se definen los prototipos de función de la librería. 
 void initPWM1 (void);
 uint8_t updateDutyCycle1A(uint8_t duty1);
 uint8_t updateDutyCycle1B(uint8_t duty2);
