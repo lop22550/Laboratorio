@@ -19,7 +19,7 @@ void initPWM2(void){
 	TCCR2B = 0;
 	
 	TCCR2A |= (1<<COM2A1)|(1<<COM2B1)|(1<<WGM21)|(1<<WGM20); // Configurando OC1A como No invertido | Configurando Modo Fast PWM OCR2A
-	TCCR2B |=(1<<WGM22)|(1<<CS22)|(1<<CS21)|(1<<CS20); //Configurando Modo Fast PWM OCR2A | Prescaler de 1024
+	TCCR2B |=(1<<CS22)|(1<<CS21)|(1<<CS20); //Configurando Modo Fast PWM OCR2A | Prescaler de 1024
 	//TCCR2B &= ~(1<<WGM22);
 
 	OCR2A = (MIN2 & 0xFF);
@@ -28,8 +28,8 @@ void initPWM2(void){
 }
 
 uint8_t updateDutyCycle2A(uint8_t duty3){
-	return (uint8_t)(((float)duty3/255)*(MAX2 - MIN2) + MIN2);
-
+	//return (uint8_t)(((float)duty3/255)*(MAX2 - MIN2) + MIN2);
+	return (uint8_t)((  (float)duty3/255  )*(MAX2 - MIN2)+MIN2);
 }
 uint8_t updateDutyCycle2B(uint8_t duty4){
 	return (uint8_t)(((float)duty4/255)*(MAX2 - MIN2) + MIN2);
